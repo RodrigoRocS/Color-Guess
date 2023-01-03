@@ -31,8 +31,8 @@ const randomDivColor = () => {
       index
     ].style.backgroundColor = `rgb(${rgbSort()}, ${rgbSort()}, ${rgbSort()})`;
   }
-  const pegaP = document.getElementById('rgb-color');
-  pegaP.innerText = `${selectRandomDiv()}`;
+  const pegaP2 = document.getElementById('rgb-color');
+  pegaP2.innerText = `${selectRandomDiv()}`;
 };
 
 const criaParagrResposta = () => {
@@ -65,10 +65,23 @@ const selecBolinha = () => {
   }
 };
 
+const criaBtnReset = () => {
+  const btnDaGalera = document.createElement('button');
+  btnDaGalera.id = 'reset-game';
+  btnDaGalera.innerText = 'RESET GAME';
+  btnDaGalera.addEventListener('click', randomDivColor);
+  btnDaGalera.addEventListener('click', () => {
+    const pegaP = document.getElementById('answer');
+    pegaP.innerText = 'Escolha uma cor';
+  });
+  pegaBody.appendChild(btnDaGalera);
+};
+
 window.onload = () => {
   criaH1();
   criaParagrColor();
   criaDivBolinha();
   randomDivColor();
   criaParagrResposta();
+  criaBtnReset();
 };
