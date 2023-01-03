@@ -48,11 +48,19 @@ const selectRandomDiv = () => {
   return String(pegaDivBall[randomDiv].style.backgroundColor);
 };
 
+const salvaScore = () => {
+  const pegaScore = document.getElementById('score');
+  localStorage.setItem('score', pegaScore.innerHTML);
+};
+
 const comparaColor = (e) => {
   const pegaP = document.getElementById('answer');
   const pegaP2 = document.getElementById('rgb-color');
-  if (String(e.target.style.backgroundColor) === pegaP2.innerText) {
+  if (e.target.style.backgroundColor === pegaP2.innerText) {
     pegaP.innerText = 'Acertou!';
+    const pegaScore = document.getElementById('score');
+    pegaScore.innerHTML = +pegaScore.innerHTML + 3;
+    salvaScore();
   } else {
     pegaP.innerText = 'Errou! Tente novamente!';
   }
@@ -77,9 +85,21 @@ const criaBtnReset = () => {
   pegaBody.appendChild(btnDaGalera);
 };
 
+const criaPlacar = () => {
+  const paragrDaGalera = document.createElement('p');
+  paragrDaGalera.id = 'score';
+  if (localStorage.getItem('score') === null) {
+    paragrDaGalera.innerText = 0;
+  } else {
+    paragrDaGalera.innerHTML = localStorage.getItem('score');
+  }
+  pegaBody.appendChild(paragrDaGalera);
+};
+
 window.onload = () => {
   criaH1();
   criaParagrColor();
+  criaPlacar();
   criaDivBolinha();
   randomDivColor();
   criaParagrResposta();
